@@ -12,3 +12,10 @@ public class Service {
 	}
 	
 }
+
+
+// DB support for:
+// - leveldb?
+// - postgres db
+// - mysql db
+// - hql for testing

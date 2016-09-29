@@ -29,8 +29,12 @@ qualifiers: {
   label: "dbcall",
   change_type: "create"
 }
-
 ```
+Shorthand version:
+```
+identifier:data_type:count[t=1000,s=pending,l=dbcall,ct=create]
+```
+
 * `customer_id` - Unique identifier for a customer, Mandatory field
 * `data_type` - Type of data you are tracking, eg Blog Post, Mandatory field
 * `count` - How many of a given data type change for this event, Mandatory field
@@ -41,4 +45,8 @@ qualifiers: {
 ** `change_type` - Crud based definition of the event, create, update, delete, etc....
 
 
+# Building
+
+* Test code `gradle test`
+* Db setup `gradle flywayMigrate -i`
 
