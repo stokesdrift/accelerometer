@@ -16,11 +16,12 @@ The idea of this tool is to answer operation traffic patterns as well as monitor
 * Time processing data for a customer?
 * Is the customer not using the product as much? Usage growing or shrinking?
 
+Support for plugins, maybe based on provider interfaces.
 
 ## Format
 
 ```
-customer_id: "unique identifier",
+identity_id: "unique identifier",
 data_type: "object type",
 count: 1,
 qualifiers: {
@@ -33,6 +34,11 @@ qualifiers: {
 Shorthand version:
 ```
 identifier:data_type:count[t=1000,s=pending,l=dbcall,ct=create]
+
+# example: 
+
+customerxyz:account:1[t=1000,s=pending,l=dbcall,ct=create]
+
 ```
 
 * `customer_id` - Unique identifier for a customer, Mandatory field

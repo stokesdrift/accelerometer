@@ -13,7 +13,7 @@ public class MessageHandlerTest {
 		String msg = "identifier:data_type:1[t=1000,s=pending,l=dbcall,ct=create]";
 		
 		MessageHandler handler = new MessageHandler();
-		DataObject object = handler.processMessage(msg);
+		DataObject object = handler.parseMessage(msg);
 		Assert.assertNotNull(object);
 		
 		Assert.assertEquals("identifier",object.getIdentityId());
@@ -26,7 +26,7 @@ public class MessageHandlerTest {
 		String msg = "identifier:data_type:1";
 		
 		MessageHandler handler = new MessageHandler();
-		DataObject object = handler.processMessage(msg);
+		DataObject object = handler.parseMessage(msg);
 		Assert.assertNotNull(object);
 		
 		Assert.assertEquals("identifier",object.getIdentityId());
@@ -39,7 +39,7 @@ public class MessageHandlerTest {
 		String msg = "identifier:data_type:";
 		
 		MessageHandler handler = new MessageHandler();
-		DataObject object = handler.processMessage(msg);
+		DataObject object = handler.parseMessage(msg);
 		Assert.assertNotNull(object);
 		
 		Assert.assertEquals("identifier",object.getIdentityId());
@@ -52,7 +52,7 @@ public class MessageHandlerTest {
 		String msg = "identifier::1";
 		
 		MessageHandler handler = new MessageHandler();
-		DataObject object = handler.processMessage(msg);
+		DataObject object = handler.parseMessage(msg);
 		Assert.assertNotNull(object);
 		
 		Assert.assertEquals("identifier",object.getIdentityId());
@@ -75,7 +75,7 @@ public class MessageHandlerTest {
 		"}";
 		
 		MessageHandler handler = new MessageHandler();
-		DataObject object = handler.processMessage(msg);
+		DataObject object = handler.parseMessage(msg);
 		Assert.assertNotNull(object);		
 		Assert.assertEquals("identifier",object.getIdentityId());
 		Assert.assertEquals("data_type",object.getDataType());

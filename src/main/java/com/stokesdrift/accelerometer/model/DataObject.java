@@ -15,6 +15,7 @@ public class DataObject {
 	private Integer count = 1;
 	private String identityId;
 	private Map<String,String> qualifiers;
+	private boolean irrelevant = false;
 	
 	public Map<String, String> getQualifiers() {
 		return qualifiers;
@@ -43,6 +44,14 @@ public class DataObject {
 		else if (dataType != null && !dataType.trim().isEmpty()) {
 			this.dataType = dataType;
 		}		
+	}
+	
+	public void markIrrelevant() {
+		irrelevant = true;
+	}
+	
+	public boolean isIrrelevant() {
+		return irrelevant;
 	}
 	
 	public Integer getCount() {
