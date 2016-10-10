@@ -1,10 +1,9 @@
 package com.stokesdrift.accelerometer.service;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.stokesdrift.accelerometer.model.DataObject;
-
-import org.junit.Assert;
 
 public class MessageHandlerTest {
 	
@@ -12,7 +11,7 @@ public class MessageHandlerTest {
 	public void testParseFullShorthandMessageHandler() {
 		String msg = "identifier:data_type:1[t=1000,s=pending,l=dbcall,ct=create]";
 		
-		MessageHandler handler = new MessageHandler();
+		DataObjectMessageProcessor handler = new DataObjectMessageProcessor();
 		DataObject object = handler.parseMessage(msg);
 		Assert.assertNotNull(object);
 		
@@ -21,11 +20,12 @@ public class MessageHandlerTest {
 		Assert.assertEquals("pending",object.getQualifiers().get("s"));
 	}
 
+
 	@Test
 	public void testParseNoOptionsShorthandMessageHandler() {
 		String msg = "identifier:data_type:1";
 		
-		MessageHandler handler = new MessageHandler();
+		DataObjectMessageProcessor handler = new DataObjectMessageProcessor();
 		DataObject object = handler.parseMessage(msg);
 		Assert.assertNotNull(object);
 		
@@ -38,7 +38,7 @@ public class MessageHandlerTest {
 	public void testParseNoCountShorthandMessageHandler() {
 		String msg = "identifier:data_type:";
 		
-		MessageHandler handler = new MessageHandler();
+		DataObjectMessageProcessor handler = new DataObjectMessageProcessor();
 		DataObject object = handler.parseMessage(msg);
 		Assert.assertNotNull(object);
 		
@@ -51,7 +51,7 @@ public class MessageHandlerTest {
 	public void testParseNoDatatypeShorthandMessageHandler() {
 		String msg = "identifier::1";
 		
-		MessageHandler handler = new MessageHandler();
+		DataObjectMessageProcessor handler = new DataObjectMessageProcessor();
 		DataObject object = handler.parseMessage(msg);
 		Assert.assertNotNull(object);
 		
@@ -74,7 +74,7 @@ public class MessageHandlerTest {
 		  " \"change_type\": \"create\" " +
 		"}";
 		
-		MessageHandler handler = new MessageHandler();
+		DataObjectMessageProcessor handler = new DataObjectMessageProcessor();
 		DataObject object = handler.parseMessage(msg);
 		Assert.assertNotNull(object);		
 		Assert.assertEquals("identifier",object.getIdentityId());

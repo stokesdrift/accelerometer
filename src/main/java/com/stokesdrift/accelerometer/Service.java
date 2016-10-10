@@ -1,14 +1,55 @@
 package com.stokesdrift.accelerometer;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.jboss.weld.environment.se.Weld;
+import org.jboss.weld.environment.se.WeldContainer;
+
+import com.stokesdrift.accelerometer.service.UdpService;
+
 public class Service {
 
+	private final static Logger logger = Logger.getLogger(Service.class.getName()); 
 	
-	public void start() {
-		// TODO start UDP, queue, etc...
+	private WeldContainer container;
+	private UdpService udpService;
+	
+	public Service() {
+			
 	}
 	
+	public void start() {
+		Weld weld = new Weld();
+		container = weld.initialize();
+		udpService = container.select(UdpService.class).get();
+		Thread t = new Thread(new Runnable() {
+			public void run() {
+				udpService.start();
+			}
+		});
+		t.start();
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			logger.log(Level.SEVERE, "server didn't start properly", e);
+		}
+				
+	}
+	
+	
+	
 	public void stop() {
-		// TODO stop UDP, add events to db 
+		udpService.stop();		
+		container.shutdown();		
+	}
+
+	public static void main(String[] args) {
+		final Service service = new Service();
+		service.start();
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+		    public void run() { service.stop(); }
+		});
 	}
 	
 }

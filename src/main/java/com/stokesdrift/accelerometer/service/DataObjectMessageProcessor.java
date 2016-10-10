@@ -1,11 +1,14 @@
 package com.stokesdrift.accelerometer.service;
 
-import java.util.Iterator;
-import java.util.ServiceLoader;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import com.stokesdrift.accelerometer.model.DataObject;
+import com.stokesdrift.accelerometer.model.EventType;
+import com.stokesdrift.accelerometer.model.MessageEvent;
+import com.stokesdrift.accelerometer.model.ServiceEvent;
+import com.stokesdrift.accelerometer.protocol.MessageProcessor;
 
 /**
  * Parse the data object from the message. 
@@ -14,16 +17,14 @@ import com.stokesdrift.accelerometer.model.DataObject;
  * @author driedtoast
  *
  */
-public class MessageHandler {
+@Singleton
+public class DataObjectMessageProcessor implements MessageProcessor {
 
+	@Inject 
+	private Event<MessageEvent> msgEvent;
 	
-	private ServiceLoader<MessageHandlerPlugin> pluginLoader;
-	private ExecutorService executorService;
-	
-	public MessageHandler() {
-		pluginLoader = ServiceLoader.load(MessageHandlerPlugin.class);
-		// TODO add configuration for thread pool;		
-		executorService = Executors.newCachedThreadPool();
+
+	public DataObjectMessageProcessor() {
 	}
 	
 	/**
@@ -32,6 +33,7 @@ public class MessageHandler {
 	 * @param msg
 	 * @return true on success
 	 */
+	@Override
 	public boolean processMessage(String msg) {
 		boolean cond = false;
 		
@@ -53,19 +55,15 @@ public class MessageHandler {
 		return cond;				
 	}
 	
+	
+	
 	/**
 	 * Notify plugins of the receive of an event
 	 * 
 	 * @param object
 	 */
 	public void notifyPluginReceive(DataObject object) {
-		Iterator<MessageHandlerPlugin> plugins = pluginLoader.iterator();
-		while(plugins.hasNext()) {
-			MessageHandlerPlugin plugin = plugins.next();
-			if (isSupportedByPlugin(object, plugin)) {
-				plugin.onReceive(object);
-			}
-		}		
+		msgEvent.fire(new MessageEvent(EventType.START, object));
 	}
 	
 	/**
@@ -73,35 +71,8 @@ public class MessageHandler {
 	 * 
 	 * @param object
 	 */
-	public void notifyPluginComplete(DataObject object) {
-		Iterator<MessageHandlerPlugin> plugins = pluginLoader.iterator();
-		while(plugins.hasNext()) {
-			MessageHandlerPlugin plugin = plugins.next();
-			if (!isSupportedByPlugin(object, plugin)) {
-				continue;
-			}
-			if (plugin.hasExternalResource() ) {
-				// add to worker threads
-				executorService.execute(new Runnable() {					
-					@Override
-					public void run() {
-						plugin.onComplete(object);
-					}
-				});
-			} else {
-			   plugin.onComplete(object);
-			}
-			
-		}		
-	}
-
-	
-	public boolean isSupportedByPlugin(DataObject obj, MessageHandlerPlugin plugin) {
-		if(plugin.filterQualifiers() != null) {
-			// TODO filter event?
-		}
-		
-		return true;
+	public void notifyPluginComplete(final DataObject object) {
+		msgEvent.fire(new MessageEvent(EventType.END, object));					
 	}
 	
 	
