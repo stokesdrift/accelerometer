@@ -1,12 +1,11 @@
-package com.stokesdrift.accelerometer;
+package org.stokesdrift.accelerometer;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
-
-import com.stokesdrift.accelerometer.service.UdpService;
+import org.stokesdrift.accelerometer.service.UdpService;
 
 public class Service {
 

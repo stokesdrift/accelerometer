@@ -1,14 +1,14 @@
-package com.stokesdrift.accelerometer.service;
+package org.stokesdrift.accelerometer.service;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import com.stokesdrift.accelerometer.model.DataObject;
-import com.stokesdrift.accelerometer.model.EventType;
-import com.stokesdrift.accelerometer.model.MessageEvent;
-import com.stokesdrift.accelerometer.model.ServiceEvent;
-import com.stokesdrift.accelerometer.protocol.MessageProcessor;
+import org.stokesdrift.accelerometer.model.DataObject;
+import org.stokesdrift.accelerometer.model.EventType;
+import org.stokesdrift.accelerometer.model.MessageEvent;
+import org.stokesdrift.accelerometer.model.ServiceEvent;
+import org.stokesdrift.accelerometer.protocol.MessageProcessor;
 
 /**
  * Parse the data object from the message. 

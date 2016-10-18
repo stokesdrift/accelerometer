@@ -1,9 +1,9 @@
-package com.stokesdrift.accelerometer.service;
+package org.stokesdrift.accelerometer.service;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import com.stokesdrift.accelerometer.model.DataObject;
+import org.stokesdrift.accelerometer.model.DataObject;
+import org.stokesdrift.accelerometer.service.DataObjectMessageProcessor;
 
 public class MessageHandlerTest {
 	

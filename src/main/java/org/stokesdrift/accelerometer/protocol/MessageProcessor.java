@@ -1,4 +1,4 @@
-package com.stokesdrift.accelerometer.protocol;
+package org.stokesdrift.accelerometer.protocol;
 
 /**
  * Used in the connection protocol to process messages coming from the connections.

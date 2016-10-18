@@ -1,4 +1,4 @@
-package com.stokesdrift.accelerometer.model;
+package org.stokesdrift.accelerometer.model;
 
 import java.util.HashMap;
 import java.util.Map;

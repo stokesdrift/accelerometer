@@ -1,11 +1,11 @@
-package com.stokesdrift.accelerometer.service;
+package org.stokesdrift.accelerometer.service;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
-import com.stokesdrift.accelerometer.model.EventType;
-import com.stokesdrift.accelerometer.model.ServiceEvent;
-import com.stokesdrift.accelerometer.protocol.UdpServer;
+import org.stokesdrift.accelerometer.model.EventType;
+import org.stokesdrift.accelerometer.model.ServiceEvent;
+import org.stokesdrift.accelerometer.protocol.UdpServer;
 
 public class UdpService {
 	@Inject 

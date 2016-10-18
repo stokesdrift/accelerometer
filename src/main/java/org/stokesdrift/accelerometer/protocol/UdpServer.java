@@ -1,4 +1,4 @@
-package com.stokesdrift.accelerometer.protocol;
+package org.stokesdrift.accelerometer.protocol;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -13,7 +13,9 @@ import java.util.logging.Logger;
  * @author driedtoast
  */
 public class UdpServer implements Runnable {
-		
+	
+	public static final int DEFAULT_PORT = 9876;
+	
 	private DatagramSocket serverSocket;
 	private boolean runServer = true;
 	// TODO configuration
@@ -27,7 +29,7 @@ public class UdpServer implements Runnable {
 	
 	
 	public void start() throws Exception {
-		serverSocket = new DatagramSocket(9876);
+		serverSocket = new DatagramSocket(DEFAULT_PORT);
 		byte[] receiveData = new byte[1024];	    
 	    while(runServer) {	    	
 	    	DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);

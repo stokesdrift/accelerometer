@@ -1,12 +1,11 @@
-package com.stokesdrift.accelerometer;
+package org.stokesdrift.accelerometer;
 
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 import org.junit.Assert;
 import org.junit.Test;
-
-import com.stokesdrift.accelerometer.service.DataObjectMessageProcessor;
-import com.stokesdrift.accelerometer.service.UdpService;
+import org.stokesdrift.accelerometer.service.DataObjectMessageProcessor;
+import org.stokesdrift.accelerometer.service.UdpService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.spi.Context;

@@ -1,4 +1,4 @@
-package com.stokesdrift.accelerometer.model;
+package org.stokesdrift.accelerometer.model;
 
 public class ServiceEvent {
 	
